@@ -1,137 +1,113 @@
-/* Paleta de colores basada en la imagen: */
 :root {
-    --dark-bg: #040404; /* Fondo casi negro/morado muy oscuro */
-    --menu-bg: #151515;
-    --text-color: #FFFFFF;
-    --active-gradient: linear-gradient(to right, #1132b6, #5c77c0); /* Degradado del botón 'All' */
-    --inactive-text: #B3B3B3; /* Gris claro para texto inactivo */
-    --title-color-start: #7D51E0; /* Inicio del degradado del título */
-    --title-color-end: #FFFFFF; /* Fin del degradado del título */
+	--dark-bg: #040404;
+	--menu-bg: #151515;
+	--text-color: #FFFFFF;
+	--active-gradient: linear-gradient(to right, #1132b6, #5c77c0);
+	--inactive-text: #B3B3B3;
+	--title-color-start: #7D51E0;
+	--title-color-end: #FFFFFF;
 }
 
 body {
-    background-color: var(--dark-bg);
-    color: var(--text-color);
-    font-family: "Red Hat Display", sans-serif;
-    margin: 0;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+	/* AJUSTE SOLICITADO: ZOOM INICIAL AL 80% */
+	transform: scale(0.8);
+	transform-origin: top left;
+	width: calc(100% / 0.8);
+
+	/* AJUSTE SOLICITADO: COMPENSACIÓN DEL MENÚ FIJO */
+	padding-top: 80px;
+
+	background-color: var(--dark-bg);
+	color: var(--text-color);
+	font-family: "Red Hat Display", sans-serif;
+	margin: 0;
 }
 
-/* --- TÍTULO --- */
 .header h1 {
-    font-size: 3em;
-    font-weight: bold;
-    /* 1. Aplicar el degradado al texto */
-    background: linear-gradient(to right, var(--title-color-start), var(--title-color-end));
-    
-    /* 2. Propiedad estándar (la que te pedía la advertencia) */
-    background-clip: text; 
-    
-    /* 3. Propiedad con prefijo para WebKit (ya la tenías, necesaria para navegadores) */
-    -webkit-background-clip: text;
-    
-    /* 4. Color de texto transparente para que se vea el fondo (degradado) */
-    -webkit-text-fill-color: transparent;
-    
-    margin-bottom: 40px;
+	font-size: 3em;
+	font-weight: bold;
+	background: linear-gradient(to right, var(--title-color-start), var(--title-color-end));
+	background-clip: text;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	margin-bottom: 40px;
 }
 
-/* --- MENÚ DE NAVEGACIÓN --- */
+/* AJUSTE SOLICITADO: MENÚ DE NAVEGACIÓN FIJO */
 .menu {
-    display: flex;
-    background-color: var(--menu-bg);
-    border-radius: 50px; /* Bordes redondeados para el contenedor del menú */
-    padding: 5px;
-    gap: 10px; /* Espacio entre botones */
-    font-family: "Red Hat Display", sans-serif;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 1000;
+
+	display: flex;
+	justify-content: center;
+	background-color: var(--menu-bg);
+	padding: 10px 0;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
 .menu-item {
-    background: none;
-    border: none;
-    color: var(--inactive-text);
-    padding: 10px 20px;
-     font-family: "Red Hat Display", sans-serif;
-    font-size: 1.5em;
-    font-weight: 100;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border-radius: 50px; /* Bordes redondeados para cada botón */
-    white-space: nowrap; /* Evita que el texto se rompa */
+	background: none;
+	border: none;
+	color: var(--inactive-text);
+	padding: 10px 20px;
+	font-family: "Red Hat Display", sans-serif;
+	font-size: 1.5em;
+	font-weight: 100;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	border-radius: 50px;
+	white-space: nowrap;
 }
 
 .menu-item:hover:not(.active) {
-    color: var(--text-color);
+	color: var(--text-color);
 }
 
-/* Estilo para el botón ACTIVO */
 .menu-item.active {
-    background: var(--active-gradient);
-    color: var(--text-color);
-    font-weight: 500;
-    box-shadow: 0 0 10px rgba(81, 129, 206, 0.5); /* Sutil sombra morada */
+	background: var(--active-gradient);
+	color: var(--text-color);
+	font-weight: 500;
+	box-shadow: 0 0 10px rgba(81, 129, 206, 0.5);
 }
 
-/* --- CONTENEDOR PRINCIPAL --- */
 .content-container {
-    margin-top: 40px;
-    /* Elimina 'width: 80%;' o configúralo para que no fuerce el ancho. */
-    /* Lo ideal es que se centre él mismo, y el contenido dentro se ajuste. */
-    /* Opcional: Centrar el contenedor principal */
-    display: flex; /* Usamos flex para centrar los contenidos */
-    flex-direction: column; /* Asegura el orden vertical dentro de este contenedor */
-    align-items: center; /* Centra horizontalmente los elementos hijos */
-    width: 100%; /* Permite que el contenedor use todo el ancho, pero centra sus hijos */
-    
+	margin-top: 40px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
 }
 
-/* --- CONTENIDO DE LAS PÁGINAS --- */
 .page-content {
-    display: none; 
-    /* ... otras propiedades ... */
-    
-    /* PROPIEDAD CLAVE: Ajusta el ancho al contenido */
-    width: fit-content; 
-    /* Alternativamente, si no funciona: display: inline-block; */
-    
-    /* PROPIEDAD CLAVE: Centra el contenido si la sección es más ancha que el SVG */
-    margin-left: auto;
-    margin-right: auto;
-    
-    /* ... tus estilos de sombra, padding, etc. ... */
-    padding: 20px;
-    border-radius: 50px;
-    min-height: 300px;
-    text-align: center;
-    border: 1px solid rgba(48, 84, 151, 0.532);
-    box-shadow: 0 4px 15px rgba(66, 66, 232, 0.342); 
+	display: none;
+	width: fit-content;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 20px;
+	border-radius: 50px;
+	min-height: 300px;
+	text-align: center;
+	border: 1px solid rgba(48, 84, 151, 0.532);
+	box-shadow: 0 4px 15px rgba(66, 66, 232, 0.342);
 }
 
 .page-content.active-content {
-    display: block; /* Muestra solo la sección activa */
-    /* Agrega una transición o animación aquí si quieres */
+	display: block;
 }
 
-/* Estilos para tus SVG (si los incluyes directamente) */
 .page-content img {
-    max-width: 100%;
-    height: auto;
-    margin-top: 20px;
+	max-width: 100%;
+	height: auto;
+	margin-top: 20px;
 }
 
+/* CLASE DIVISORA SOLICITADA */
 .divider {
-    /* Propiedad clave para controlar el espaciado vertical */
-    height: 1px; 
-    
-    /* Asegura que el elemento se comporte como un bloque para respetar la altura */
-    display: block; 
-    
-    /* Opcional: Asegura que no sea visible, aunque sin contenido ya lo es */
-    visibility: hidden;
-    
-    /* Opcional: Ocupa todo el ancho */
-    width: 100%; 
+	height: 1px;
+	display: block;
+	visibility: hidden;
+	width: 100%;
 }
