@@ -26,9 +26,14 @@ body {
 /* 3. CONTENEDOR PRINCIPAL (ZOOM INICIAL) */
 /* ==================================== */
 .main-content-wrapper {
-	transform: scale(0.8);
+	/* ZOOM POR DEFECTO PARA ESCRITORIO (70%) */
+	transform: scale(0.7);
 	transform-origin: top left;
-	width: calc(100% / 0.8);
+	width: calc(100% / 0.7);
+	position: relative;
+	left: 50%;
+	margin-left: -21.43%;
+
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -48,6 +53,17 @@ body {
 	background-color: var(--menu-bg);
 	padding: 10px 0;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* ==================================== */
+/* 7. CONTENEDOR DE PÁGINAS */
+/* ==================================== */
+.content-container {
+	margin-top: 40px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
 }
 
 /* ==================================== */
@@ -92,17 +108,6 @@ body {
 }
 
 /* ==================================== */
-/* 7. CONTENEDOR DE PÁGINAS */
-/* ==================================== */
-.content-container {
-	margin-top: 40px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	width: 100%;
-}
-
-/* ==================================== */
 /* 8. CONTENIDO DE PÁGINA ESPECÍFICO */
 /* ==================================== */
 .page-content {
@@ -129,8 +134,7 @@ body {
 .page-content img {
 	max-width: 100%;
 	height: auto;
-    margin-bottom: -10px;
-	/* margin-top: 20px; */
+	margin-bottom: -10px;
 }
 
 .page-content>div {
@@ -156,7 +160,7 @@ body {
 	border-radius: 10px;
 	margin: auto;
 	background: black;
-	width: fit-content;
+	width: 80vw;
 }
 
 .svg-summary {
@@ -204,4 +208,47 @@ body {
 /* ------------------------------------- */
 .title-img {
 	border-radius: 10px 10px 0 0;
+}
+
+/* ==================================== */
+/* 12. MEDIA QUERY (VISTA MÓVIL) */
+/* ==================================== */
+@media (max-width: 800px) {
+
+	/* Desactivar el ZOOM y centrado de ESCRITORIO */
+	.main-content-wrapper {
+		transform: scale(1);
+		width: 100%;
+		position: static;
+		left: auto;
+		margin-left: auto;
+	}
+
+	/* Reducir el padding superior del body */
+	body {
+		padding-top: 60px;
+	}
+
+	/* Ajuste de tamaño para el contenedor de detalles */
+	.svg-details {
+		width: 95vw;
+		/* Usa casi todo el ancho disponible */
+		margin-left: 2.5vw;
+		margin-right: 2.5vw;
+	}
+
+	/* Ajustar el botón de la flecha para que no se desborde */
+	.svg-summary::after {
+		font-size: 30px;
+		width: 40px;
+		height: 40px;
+		left: 90%;
+		/* Mantiene la posición del 90% */
+	}
+
+	/* Ajustar el tamaño del menú para móvil (opcional) */
+	.menu-item {
+		font-size: 1em;
+		padding: 8px 10px;
+	}
 }
