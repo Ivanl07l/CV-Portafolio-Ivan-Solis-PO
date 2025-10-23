@@ -1,3 +1,6 @@
+/* ==================================== */
+/* 1. VARIABLES GLOBALES (ROOT) */
+/* ==================================== */
 :root {
 	--dark-bg: #040404;
 	--menu-bg: #151515;
@@ -8,21 +11,48 @@
 	--title-color-end: #FFFFFF;
 }
 
+/* ==================================== */
+/* 2. ESTILOS BASE (BODY) */
+/* ==================================== */
 body {
-	/* AJUSTE SOLICITADO: ZOOM INICIAL AL 80% */
-	transform: scale(0.8);
-	transform-origin: top left;
-	width: calc(100% / 0.8);
-
-	/* AJUSTE SOLICITADO: COMPENSACIÓN DEL MENÚ FIJO */
-	padding-top: 80px;
-
 	background-color: var(--dark-bg);
 	color: var(--text-color);
 	font-family: "Red Hat Display", sans-serif;
 	margin: 0;
+	padding-top: 80px;
 }
 
+/* ==================================== */
+/* 3. CONTENEDOR PRINCIPAL (ZOOM INICIAL) */
+/* ==================================== */
+.main-content-wrapper {
+	transform: scale(0.8);
+	transform-origin: top left;
+	width: calc(100% / 0.8);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+/* ==================================== */
+/* 4. MENÚ DE NAVEGACIÓN (FIJO) */
+/* ==================================== */
+.menu {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 1000;
+	display: flex;
+	justify-content: center;
+	background-color: var(--menu-bg);
+	padding: 10px 0;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* ==================================== */
+/* 5. TÍTULO DE LA PÁGINA (HEADER) */
+/* ==================================== */
 .header h1 {
 	font-size: 3em;
 	font-weight: bold;
@@ -33,21 +63,9 @@ body {
 	margin-bottom: 40px;
 }
 
-/* AJUSTE SOLICITADO: MENÚ DE NAVEGACIÓN FIJO */
-.menu {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	z-index: 1000;
-
-	display: flex;
-	justify-content: center;
-	background-color: var(--menu-bg);
-	padding: 10px 0;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-}
-
+/* ==================================== */
+/* 6. ITEMS DEL MENÚ */
+/* ==================================== */
 .menu-item {
 	background: none;
 	border: none;
@@ -73,6 +91,9 @@ body {
 	box-shadow: 0 0 10px rgba(81, 129, 206, 0.5);
 }
 
+/* ==================================== */
+/* 7. CONTENEDOR DE PÁGINAS */
+/* ==================================== */
 .content-container {
 	margin-top: 40px;
 	display: flex;
@@ -81,33 +102,106 @@ body {
 	width: 100%;
 }
 
+/* ==================================== */
+/* 8. CONTENIDO DE PÁGINA ESPECÍFICO */
+/* ==================================== */
 .page-content {
 	display: none;
-	width: fit-content;
+	max-width: 100%;
 	margin-left: auto;
 	margin-right: auto;
-	padding: 20px;
+	padding: 0px;
 	border-radius: 50px;
 	min-height: 300px;
 	text-align: center;
 	border: 1px solid rgba(48, 84, 151, 0.532);
 	box-shadow: 0 4px 15px rgba(66, 66, 232, 0.342);
+	background-color: #070707;
 }
 
 .page-content.active-content {
 	display: block;
 }
 
+/* ==================================== */
+/* 9. ELEMENTOS INTERNOS (IMAGEN/DIV) */
+/* ==================================== */
 .page-content img {
 	max-width: 100%;
 	height: auto;
-	margin-top: 20px;
+    margin-bottom: -10px;
+	/* margin-top: 20px; */
 }
 
-/* CLASE DIVISORA SOLICITADA */
+.page-content>div {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+/* ==================================== */
+/* 10. DIVISOR INVISIBLE */
+/* ==================================== */
 .divider {
 	height: 1px;
 	display: block;
-	visibility: hidden;
 	width: 100%;
+}
+
+/* ==================================== */
+/* 11. ESTILOS DETAILS CON IMAGEN SVG */
+/* ==================================== */
+.svg-details {
+	border-radius: 10px;
+	margin: auto;
+	background: black;
+	width: fit-content;
+}
+
+.svg-summary {
+	position: relative;
+	display: block;
+	cursor: pointer;
+	list-style: none;
+}
+
+.svg-summary::-webkit-details-marker {
+	display: none;
+}
+
+/* ------------------------------------- */
+/* ESTILOS DEL BOTÓN/FLECHA SUPERPUESTA */
+/* ------------------------------------- */
+.svg-summary::after {
+	content: "chevron_right";
+	font-family: 'Material Icons', sans-serif;
+	font-size: 50px;
+	position: absolute;
+	top: 50%;
+	left: 90%;
+	transform: translateY(-50%) rotate(90deg);
+	color: var(--text-color);
+	border-radius: 50%;
+	width: 60px;
+	height: 60px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.svg-summary:hover::after {
+	background-color: rgba(255, 255, 255, 0.2);
+}
+
+.svg-details[open] .svg-summary::after {
+	transform: translateY(-50%) rotate(-90deg);
+}
+
+/* ------------------------------------- */
+/* ESTILOS DE IMAGEN/CONTENIDO */
+/* ------------------------------------- */
+.title-img {
+	border-radius: 10px 10px 0 0;
 }
