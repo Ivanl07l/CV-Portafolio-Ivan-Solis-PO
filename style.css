@@ -2,13 +2,15 @@
 /* 1. VARIABLES GLOBALES (ROOT) */
 /* ==================================== */
 :root {
-    --dark-bg: #040404;
-    --menu-bg: #151515;
-    --text-color: #FFFFFF;
-    --active-gradient: linear-gradient(to right, #1132b6, #5c77c0);
-    --inactive-text: #B3B3B3;
-    --title-color-start: #7D51E0;
-    --title-color-end: #FFFFFF;
+    --dark-bg: #040404; /* Fondo principal oscuro */
+    --menu-bg: #151515; /* Fondo del menú/modal */
+    --text-color: #FFFFFF; /* Color de texto principal */
+    --inactive-text: #B3B3B3; /* Color de texto inactivo/secundario */
+    --active-gradient: linear-gradient(to right, #1132b6, #5c77c0); /* Gradiente para elemento activo */
+    --title-color-start: #7D51E0; /* Color de inicio para títulos en gradiente */
+    --title-color-end: #FFFFFF; /* Color de fin para títulos en gradiente */
+    --border-color: rgba(48, 84, 151, 0.532); /* Color de borde para secciones */
+    --box-shadow-color: rgba(66, 66, 232, 0.342); /* Sombra para secciones */
 }
 
 /* ==================================== */
@@ -19,16 +21,17 @@ body {
     color: var(--text-color);
     font-family: "Red Hat Display", sans-serif;
     margin: 0;
-    padding-top: 80px;
-    /* CORRECCIÓN #1: Evita el scroll horizontal causado por elementos que se desbordan */
+    /* Espacio superior para compensar el menú fijo */
+    padding-top: 80px; 
+    /* Evita el scroll horizontal causado por elementos que se desbordan */
     overflow-x: hidden;
 }
 
 /* ==================================== */
-/* 3. CONTENEDOR PRINCIPAL - SOLO ESCRITORIO */
+/* 3. CONTENEDOR PRINCIPAL DE ESCRITORIO (No se usó en HTML, se puede eliminar si no es necesario) */
 /* ==================================== */
+/*
 .main-content-wrapper {
-    /* Mantenemos tu zoom para escritorio */
     transform: scale(0.7);
     transform-origin: top left;
     width: calc(100% / 0.7);
@@ -36,6 +39,7 @@ body {
     flex-direction: column;
     align-items: center;
 }
+*/
 
 /* ==================================== */
 /* 4. MENÚ DE NAVEGACIÓN */
@@ -53,22 +57,6 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
-/* ==================================== */
-/* 5. TÍTULO DE LA PÁGINA */
-/* ==================================== */
-.header h1 {
-    font-size: 3em;
-    font-weight: bold;
-    background: linear-gradient(to right, var(--title-color-start), var(--title-color-end));
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 40px;
-}
-
-/* ==================================== */
-/* 6. ITEMS DEL MENÚ */
-/* ==================================== */
 .menu-item {
     background: none;
     border: none;
@@ -95,7 +83,7 @@ body {
 }
 
 /* ==================================== */
-/* 7. CONTENEDOR DE PÁGINAS */
+/* 5. CONTENEDORES DE PÁGINA Y SECCIONES */
 /* ==================================== */
 .content-container {
     margin-top: 40px;
@@ -106,9 +94,6 @@ body {
     width: 100%;
 }
 
-/* ==================================== */
-/* 8. CONTENIDO DE PÁGINA */
-/* ==================================== */
 .page-content {
     display: none;
     max-width: 100%;
@@ -118,54 +103,48 @@ body {
     border-radius: 50px;
     min-height: 300px;
     text-align: center;
-    border: 1px solid rgba(48, 84, 151, 0.532);
-    box-shadow: 0 4px 15px rgba(66, 66, 232, 0.342);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 15px var(--box-shadow-color);
     background-color: #070707;
+    /* Ajuste para asegurar que las imágenes no causen desborde horizontal */
+    overflow: hidden; 
 }
 
 .page-content.active-content {
     display: block;
 }
 
-/* ==================================== */
-/* 9. IMÁGENES Y CONTENEDOR DE BOTÓN */
-/* ==================================== */
-.page-content img {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: -10px;
-}
-
-.page-content>div {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    /* CORRECCIÓN #2: 'overflow: auto' aquí es seguro, pero no debe causar scroll horizontal */
-    overflow-y: auto;
-}
-
-/* Nuevo Contenedor para posicionar el botón sobre un SVG */
-.header-with-button-container {
-    position: relative;
-    display: inline-block;
-    line-height: 0;
-    /* CORRECCIÓN #3: Asegura que la imagen no genere espacio extra */
-    max-width: 100%;
-}
-
-
-/* ==================================== */
-/* 10. DIVISOR */
-/* ==================================== */
+/* Divisor de espacio vertical */
 .divider {
     height: 100px;
-    /* Se corregirá en el @media */
     display: block;
     width: 100%;
 }
 
 /* ==================================== */
-/* 11. DETAILS CON IMAGEN SVG */
+/* 6. IMÁGENES Y MEDIA */
+/* ==================================== */
+
+.page-content img {
+    max-width: 100%;
+    height: auto;
+    /* Elimina el espacio blanco debajo de las imágenes */
+    margin-bottom: -10px; 
+}
+
+/* Estilo para títulos con gradiente (Si se usa en el futuro, ya que el H1 no se está usando) */
+.header h1 {
+    font-size: 3em;
+    font-weight: bold;
+    background: linear-gradient(to right, var(--title-color-start), var(--title-color-end));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 40px;
+}
+
+/* ==================================== */
+/* 7. DETAILS SVG (Experiencia Colapsable) */
 /* ==================================== */
 .svg-details {
     border-radius: 10px;
@@ -185,7 +164,7 @@ body {
     display: none;
 }
 
-/* BOTÓN/FLECHA */
+/* Icono de flecha/chevrón */
 .svg-summary::after {
     content: "chevron_right";
     font-family: 'Material Icons', sans-serif;
@@ -208,64 +187,97 @@ body {
     background-color: rgba(255, 255, 255, 0.2);
 }
 
+/* Rotación del icono al abrirse */
 .svg-details[open] .svg-summary::after {
     transform: translateY(-50%) rotate(-90deg);
 }
 
-/* IMAGEN/CONTENIDO */
 .title-img {
     border-radius: 10px 10px 0 0;
 }
 
 /* ==================================== */
-/* 12. ESTILOS DEL MODAL */
+/* 8. BOTÓN DE APERTURA DEL MODAL (En la sección Branding) */
 /* ==================================== */
 
-/* Fondo oscurecido */
+/* Contenedor para posicionar el botón. Se recomienda usar solo 'modal-opener-button' */
+/*
+.button-right-container {
+    // Si necesitas un contenedor para el botón:
+    // display: flex;
+    // justify-content: flex-end;
+}
+*/
+
+.modal-opener-button {
+    /* Gradiente de fondo y textura */
+    color: #333333;
+    padding: 15px 120px;
+    font-family: "Red Hat Display", sans-serif;
+    font-size: 1.8em;
+    font-weight: 800;
+    cursor: pointer;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3);
+    border: 3px solid #6ab7b1;
+    background: linear-gradient(135deg, #c7e9c0 0%, #6ab7b1 100%);
+    background-image: url('./assets/svg/modal_button_bkg.svg');
+    background-blend-mode: overlay;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.modal-opener-button:hover {
+    opacity: 0.6
+}
+
+/* ==================================== */
+/* 9. ESTILOS DEL MODAL */
+/* ==================================== */
+
 .modal {
-    display: none;
+    display: none; /* Inicia oculto */
     position: fixed;
     z-index: 2000;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    /* CORRECCIÓN CENTRADO: Usamos flexbox para centrado perfecto */
-    display: flex;
+    /* Flexbox para centrado perfecto por JS al abrirse */
     align-items: center;
     justify-content: center;
-    /* Mantenemos scroll si el modal es más alto que la pantalla */
     overflow-y: auto;
     background-color: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(5px);
     animation: fadeIn 0.3s ease-out;
 }
 
-/* Contenido del modal */
 .modal-content {
     background-color: var(--menu-bg);
-    /* Eliminamos margin fijo, ya centrado por flexbox */
-    margin: 1% auto 1% auto;
+    margin: auto;
     padding: 20px;
     border: 1px solid rgba(81, 129, 206, 0.5);
-    width: 76%;
-    max-width: 940px;
+    width: 80%;
+    max-width: 1200px;
     border-radius: 70px;
     position: relative;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     animation: slideIn 0.3s ease-out;
-    overflow: auto;
-    /* Asegura que el contenido interno no desborde */
+    overflow: hidden;
 }
 
-/* Botón de cierre (la X) */
+/* Botón de cierre 'X' */
 .close-button {
     color: #ff7979;
-    /* float: right; */
-    margin: 1% 2% 1% 90%;
+    /* Ajuste para que la 'X' quede arriba a la derecha */
+    position: absolute; 
+    top: 10px;
+    right: 30px;
     font-size: 48px;
     font-weight: bold;
-    line-height: 20px;
+    line-height: 1;
     cursor: pointer;
     transition: color 0.3s;
 }
@@ -277,76 +289,81 @@ body {
     cursor: pointer;
 }
 
-/* Cuerpo del Modal */
 .modal-body {
     padding: 10px;
     text-align: center;
-    overflow: auto;
 }
 
-.modal-body h3 {
-    color: #5c77c0;
-    font-family: "Onest", sans-serif;
-    margin-top: 0;
-    margin-bottom: 20px;
-}
-
-.modal-body p {
-    color: var(--inactive-text);
-    margin-bottom: 25px;
-}
-
+/* Botón de acción dentro del modal (Cerrar) */
 .modal-action-button {
-    background-image: url('./assets/svg/modal_button_bkg.svg');
-    color: #333333;
+    color: #ffffff;
     border: none;
     padding: 9px 45px;
     border-radius: 15px;
     cursor: pointer;
     font-size: 1.5em;
-    font-weight: bold;
-    transition: opacity 0.3s;
+    font-weight: 500;
     font-family: 'Red Hat Display';
     margin: 2% 1% 1% 1%;
+    background: #575757;
 }
 
 .modal-action-button:hover {
     opacity: 0.9;
 }
 
-/* Animaciones */
+/* Animaciones del Modal */
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 @keyframes slideIn {
-    from {
-        transform: translateY(-50px);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
 }
 
-/* ==================================== */
-/* 13. ESTILOS DEL BOTÓN PARA ABRIR MODAL */
-/* ==================================== */
-.modal-opener-button {
-    /* Gradiente de fondo y textura */
-    /* background: linear-gradient(135deg, #c7e9c0 0%, #6ab7b1 100%); */
-    background-image: url('./assets/svg/modal_button_bkg_2.svg');
-    /* background-blend-mode: overlay; */
+
+
+/* ----------------------------------- */
+/* 1. CONTENEDOR GRID (4 COLUMNAS) */
+/* ----------------------------------- */
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    gap: 10px;
+    height: 80px;
+    margin: 0% 4% 0% 4%;
+    background: #000000;
+    padding: .5% 0%;
+}
+
+/* ----------------------------------- */
+/* 2. ALINEACIÓN DEL BOTÓN (COLUMNA 4) */
+/* ----------------------------------- */
+.columna-4-contenedor {
+    justify-content: center;
+    margin: 0% 28% 0% 0%;
+}
+
+/* ----------------------------------- */
+/* 3. ÍTEMS DE COLUMNA */
+/* ----------------------------------- */
+.columna-item {
+    display: flex;
+    align-items: center;
+}
+
+/* ----------------------------------- */
+/* 4. ESTILO DEL BOTÓN */
+/* ----------------------------------- */
+.boton-derecha {
+    background: linear-gradient(135deg, #c7e9c0 0%, #6ab7b1 100%);
+    background-image: url('./assets/svg/modal_button_bkg.svg');
+    background-blend-mode: overlay;
     border: none;
-    /* color: #333333; */
+    color: #333333;
     padding: 12px 25px;
     font-family: "Red Hat Display", sans-serif;
     font-size: 1.2em;
@@ -354,108 +371,84 @@ body {
     cursor: pointer;
     border-radius: 50px;
     transition: all 0.3s ease;
-    /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); */
-    /* letter-spacing: 0.5px; */
-    /* text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3); */
-
-    /* Posicionamiento por defecto (Escritorio) */
-    position: absolute;
-    /* z-index: 10; */
-    /* top: 64%; */
-    /* left: 71%; */
-    transform: translate(-50%, -50%);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    letter-spacing: 0.5px;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3);
+    margin: 0% 13% 0% 0%;
 }
 
-.modal-opener-button:hover {
-    transform: translate(-50%, -50%) translateY(-2px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
-    filter: brightness(1.1);
-}
 
-.modal-opener-button:active {
-    transform: translate(-50%, -50%) translateY(0);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
+
+
 
 
 /* ==================================== */
-/* 14. RESPONSIVE DESIGN (CORREGIDO) */
+/* 10. RESPONSIVE DESIGN */
 /* ==================================== */
 
 /* 📱 Pantallas móviles (hasta 768px) */
 @media (max-width: 768px) {
 
-    /* Body y Contenido Principal */
-    body {
-        padding-top: 60px;
-    }
+    /* Base */
+    body { padding-top: 60px; }
 
-    /* Quitamos el zoom general. */
+    /* Eliminamos el zoom general de escritorio */
     .main-content-wrapper {
         transform: none;
         width: 100%;
     }
 
-    /* MENÚ: Scroll horizontal y alineación izquierda */
+    /* Menú: Scroll horizontal y alineación izquierda */
     .menu {
         justify-content: flex-start;
         overflow-x: scroll;
-        -ms-overflow-style: none;
-        scrollbar-width: none;
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
         gap: 5px;
         padding: 8px 10px;
     }
 
     /* Ocultar barra de scroll para WebKit (Chrome, Safari) */
-    .menu::-webkit-scrollbar {
-        display: none;
-    }
+    .menu::-webkit-scrollbar { display: none; }
 
-    /* Items del menú */
     .menu-item {
         font-size: 1em;
         padding: 8px 14px;
         flex: 0 0 auto;
     }
 
-    /* Contenedores de Página */
+    /* Contenedores */
     .content-container {
         margin-top: 20px;
         margin-bottom: 20px;
         width: 100%;
-        /* Para asegurar el centrado del contenido dentro */
         margin-left: auto;
         margin-right: auto;
     }
 
-    /* CONTENIDO DE PÁGINA: Usamos 100% del ancho del contenedor */
     .page-content {
         border-radius: 20px;
         border: 1px solid rgba(48, 84, 151, 0.3);
         box-shadow: none;
         padding: 0;
-        /* CORRECCIÓN SCROLL: Usamos 100% y centramos el contenedor .content-container */
         width: 100%;
         max-width: 100%;
         box-sizing: border-box;
     }
 
-    /* CORRECCIÓN ESPACIO VERTICAL: Reducimos el divisor */
-    .divider {
-        height: 50px;
-    }
+    /* Reducción del divisor vertical */
+    .divider { height: 50px; }
 
-    /* Imágenes y SVG */
+    /* Imágenes */
     .page-content img {
         width: 100%;
-        height: auto;
         display: block;
         margin: 0 auto;
         margin-bottom: 0;
         border-radius: 10px;
     }
 
-    /* Botón del Modal */
+    /* Botón de Apertura del Modal */
     .modal-opener-button {
         top: 90%;
         left: 50%;
@@ -471,49 +464,48 @@ body {
         width: 40px;
         height: 40px;
     }
+.modal {
+    overflow-y: auto;
+}
+    .modal-body>img {width: 100%;}
 
-    /* Responsive del Modal */
+    /* Modal */
     .modal-content {
-        /* Centrado flexible */
         margin: 20px auto;
         width: 90%;
         padding: 5px;
         border-radius: 20px;
+        max-width: 500px;
     }
 
     .modal-action-button {
         padding: 9px 45px;
-        border-radius: 15px;
-        font-size: .5em;
-        font-weight: bold;
-        margin: 2% 1% 1% 1%;
+        font-size: .7em; /* Ajustado a 1em para mayor legibilidad */
+    }
+    .grid-container{
+        height: 10px;
     }
 }
 
 /* 📲 Pantallas muy pequeñas (hasta 480px) */
 @media (max-width: 480px) {
-
-    /* MENÚ: Ajuste fino */
-    .menu {
-        flex-wrap: nowrap;
-        overflow-x: scroll;
-        padding: 6px 5px;
-        justify-content: flex-start;
-    }
+    /* Menú */
+    .menu { padding: 6px 5px; }
 
     .menu-item {
         font-size: 0.9em;
         padding: 6px 10px;
     }
 
+    /* Contenido */
     .page-content {
         border-radius: 15px;
         padding: 10px;
         width: 90%;
-        /* Usamos 100% y el body maneja el margen */
         margin-top: 0.5%;
     }
 
+    /* Detalle SVG */
     .svg-summary::after {
         left: 90%;
         font-size: 20px;
@@ -521,15 +513,19 @@ body {
         height: 20px;
     }
 
-    /* CORRECCIÓN ESPACIO VERTICAL: Ajuste fino del divisor */
-    .divider {
-        height: 30px;
-    }
+    /* Divisor */
+    .divider { height: 30px; }
 
-    /* Botón del Modal */
+    /* Botón de Apertura del Modal (Ajuste fino) */
     .modal-opener-button {
-        top: 48.5%;
+        /* Se sugiere probar con top: 70%; en lugar de 48.5% si la imagen es vertical */
+        top: 70%;
         font-size: 0.4em;
-        padding: 1px 12px;
+        padding: 0.5px 15px;
+        border: 0.5px solid #6ab7b1;
+    }
+    .grid-container{
+        height: 10px;
     }
 }
+
