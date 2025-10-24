@@ -50,15 +50,7 @@ var span = document.getElementsByClassName("close-button")[0];
 var actionButton = document.getElementsByClassName("modal-action-button")[0];
 
 
-// Función para abrir el modal (puedes llamarla desde donde quieras, por ejemplo, un botón)
-function openModal() {
-    modal.style.display = "block";
-}
 
-// Función para cerrar el modal
-function closeModal() {
-    modal.style.display = "none";
-}
 
 // Cuando el usuario haga click en (x), cerrar el modal
 span.onclick = function() {
@@ -77,15 +69,45 @@ window.onclick = function(event) {
     }
 }
 
+// ----------------------------------------------------
+// 2. LÓGICA DE MODALES (Genérica para Múltiples Modales)
+// ----------------------------------------------------
 
-// **EJEMPLO DE USO:**
-// Para probar, si quieres que el modal se abra automáticamente 2 segundos después de cargar la página,
-// puedes descomentar la siguiente línea:
-// setTimeout(openModal, 2000); 
+/**
+ * Función genérica para cerrar un modal.
+ * @param {HTMLElement} modalElement - El elemento modal a cerrar.
+ */
+function closeModal(modalElement) {
+    if (modalElement) {
+        modalElement.style.display = "none";
+    }
+}
 
-// Si quieres que un elemento de tu página abra el modal,
-// por ejemplo, si agregas un botón con el id="openModalBtn", usarías:
-// var btn = document.getElementById("openModalBtn");
-// btn.onclick = openModal;
+// 1. Manejo del Clic en Botones de Cierre (X y Cerrar)
+document.addEventListener('click', (event) => {
+    let modalElement = null;
 
+    // Caso 1: Clic en el botón 'X' o 'Cerrar' dentro de un modal
+    if (event.target.classList.contains('close-button') || event.target.classList.contains('modal-action-button')) {
+        // En este caso, el padre del padre del botón es el modal, o lo encontramos con un selector.
+        modalElement = event.target.closest('.modal');
+        
+    } 
+    // Caso 2: Clic fuera de un modal
+    else if (event.target.classList.contains('modal') && event.target.id.startsWith('modal')) {
+        // Si el elemento clickeado es el fondo del modal (el propio modal div)
+        modalElement = event.target;
+    }
 
+    if (modalElement) {
+        closeModal(modalElement);
+    }
+});
+
+// Función para abrir el modal (llamada desde el HTML)
+function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.style.display = "flex";
+    }
+}
