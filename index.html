@@ -2,10 +2,20 @@
 <html lang="es">
 
 <head>
+    <!-- CONFIGURACIÓN BÁSICA DEL DOCUMENTO -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portafolio_Ivan Solis-PO_CV</title>
+
+    <!-- TÍTULO DE LA PÁGINA -->
+    <title>CV-Portafolio_Ivan Solis-PO</title>
+
+    <!-- ICONO DE LA PÁGINA -->
+    <link rel="icon" type="image/png" href="./assets/logo.ico">
+
+    <!-- ENLACE AL ARCHIVO CSS PRINCIPAL -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- FUENTES DE GOOGLE (Onest y Red Hat Display) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" rel="stylesheet">
@@ -14,87 +24,125 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap"
         rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+    <!-- ÍCONOS DE MATERIAL DESIGN -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
+
+    <!-- MENÚ DE NAVEGACIÓN SUPERIOR -->
     <nav class="menu">
         <button class="menu-item active" data-target="all">Inicio</button>
-        <button class="menu-item" data-target="apps">Apps</button>
-        <button class="menu-item" data-target="branding">Branding</button>
-        <button class="menu-item" data-target="content">Content</button>
+        <button class="menu-item" data-target="sobre-mi">Sobre mi</button>
+        <button class="menu-item" data-target="branding">Proyectos</button>
+        <button class="menu-item" data-target="content">Portafolio</button>
         <button class="menu-item" data-target="uxui">UX/UI</button>
     </nav>
 
+    <!-- CONTENEDOR PRINCIPAL -->
     <main class="content-container">
+
+        <!-- SECCIÓN: INICIO -->
         <section id="all" class="page-content active-content">
 
-
+            <!-- HEADER -->
+            <div class="divider"></div>
             <img src="./assets/svg/header.svg">
 
-            <div class="divider" style="height: 100px;"></div>
-            <img src="./assets/svg/sobre-mi.svg">
-
-
-            <div class="divider" style="height: 100px;"></div>
+            <!-- SKILLS -->
+            <div class="divider"></div>
             <img src="./assets/svg/skills.svg">
 
-            <div class="divider" style="height: 100px;"></div>
-
-
+            <!-- EXPERIENCIA LABORAL -->
+            <div class="divider"></div>
             <img src="./assets/svg/experience_header.svg">
 
+            <!-- EXPERIENCIA 1 -->
             <details class="svg-details">
                 <summary class="svg-summary">
                     <img class="title-img" src="./assets/svg/job_1_title.svg" alt="Título SVG">
                 </summary>
-
                 <div class="svg-content-wrapper">
                     <img class="content-img" src="./assets/svg/job_1_content.svg" alt="Contenido SVG">
                 </div>
             </details>
 
-             <img src="./assets/svg/divider.svg">
+            <img src="./assets/svg/divider.svg">
 
+            <!-- EXPERIENCIA 2 -->
             <details class="svg-details">
                 <summary class="svg-summary">
                     <img class="title-img" src="./assets/svg/job_2_title.svg" alt="Título SVG">
                 </summary>
-
                 <div class="svg-content-wrapper">
                     <img class="content-img" src="./assets/svg/job_2_content.svg" alt="Contenido SVG">
                 </div>
             </details>
 
-
             <img src="./assets/svg/experience_footer.svg">
-            <div class="divider" style="height: 100px;"></div>
+            <div class="divider"></div>
 
+            <!-- EDUCACIÓN -->
+            <img src="./assets/svg/education.svg">
+            <div class="divider"></div>
+
+            <!-- HERRAMIENTAS -->
+            <img src="./assets/svg/tools.svg">
+            <div class="divider"></div>
         </section>
 
-        <section id="apps" class="page-content">
-            <h2>Página Apps</h2>
-            <p>Trabajos relacionados con aplicaciones.</p>
+        <!-- SECCIÓN: SOBRE MÍ -->
+        <section id="sobre-mi" class="page-content">
+            <div class="divider""></div>
+            <img src="./assets/svg/about-me.svg">
+            <div class="divider""></div>
+            <img src="./assets/svg/about-me_content.svg">
+            <div class="divider""></div>
         </section>
 
+        <!-- SECCIÓN: PROYECTOS / BRANDING -->
         <section id="branding" class="page-content">
-            <h2>Página Branding</h2>
-            <p>Trabajos de branding.</p>
+            <div class="divider""></div>
+            <img src="./assets/svg/project-title.svg">
+            <div class="divider""></div>
+            <img src="./assets/svg/project_1_access.svg">
+            
+            
+            
+            <div class="modal-opener-button-po">
+                <button class="modal-opener-button" onclick="openModal()">Ver</button>
+            </div>
 
+            <!-- MODAL - PROYECTO 1 -->
+            <div id="simpleModal" class="modal">
+                <div class="modal-content">
+                    <span class="close-button">&times;</span>
+                    <div class="modal-body">
+                        <img src="./assets/svg/project_1_modal.svg">
+                        <button class="modal-action-button">Cerrar</button>
+                    </div>
+                </div>
+            </div>
 
-            <section id="content" class="page-content">
-                <h2>Página Content</h2>
-                <p>Trabajos de contenido.</p>
-            </section>
+            <div class="divider""></div>
 
-            <section id="uxui" class="page-content">
-                <h2>Página UX/UI</h2>
-                <p>Trabajos de UX/UI.</p>
-            </section>
+        </section>
 
+        <!-- SECCIÓN: PORTAFOLIO / CONTENT -->
+        <section id="content" class="page-content">
+            <h2>Página Content</h2>
+            <p>Trabajos de contenido.</p>
+        </section>
+
+        <!-- SECCIÓN: UX/UI -->
+        <section id="uxui" class="page-content">
+            <h2>Página UX/UI</h2>
+            <p>Trabajos de UX/UI.</p>
+        </section>
     </main>
 
+    <!-- SCRIPT PRINCIPAL -->
     <script src="script.js"></script>
 </body>
 
